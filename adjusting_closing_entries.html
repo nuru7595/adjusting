@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adjusting & Closing Entries - Master Guide</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', 'Noto Sans Bengali', Arial, sans-serif;
+    background: #0f1115;
+    color: #e8e8e8;
+    line-height: 1.7;
+    padding: 16px;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  h1 {
+    font-size: 1.5rem;
+    color: #7dd3fc;
+    border-bottom: 2px solid #7dd3fc;
+    padding-bottom: 10px;
+    margin-bottom: 16px;
+  }
+  h2 {
+    font-size: 1.2rem;
+    color: #fbbf24;
+    margin-top: 28px;
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    background: #1a1d24;
+    border-left: 4px solid #fbbf24;
+    border-radius: 4px;
+  }
+  h3 {
+    font-size: 1.05rem;
+    color: #a5f3fc;
+    margin-top: 18px;
+    margin-bottom: 8px;
+  }
+  p { margin-bottom: 10px; font-size: 0.98rem; }
+  .box {
+    background: #1a1d24;
+    border: 1px solid #2a2e38;
+    border-radius: 8px;
+    padding: 14px;
+    margin: 12px 0;
+  }
+  .formula {
+    background: #14202b;
+    border: 1px solid #2563eb;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin: 10px 0;
+    font-weight: 600;
+    color: #93c5fd;
+    text-align: center;
+    font-size: 1.02rem;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 0.92rem;
+    background: #1a1d24;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  th, td {
+    padding: 8px 10px;
+    text-align: left;
+    border-bottom: 1px solid #2a2e38;
+  }
+  th {
+    background: #22262f;
+    color: #fbbf24;
+  }
+  td.amount, th.amount { text-align: right; }
+  tr.total td {
+    font-weight: 700;
+    color: #86efac;
+    border-top: 2px solid #3a3f4a;
+  }
+  ul, ol { margin: 8px 0 8px 20px; }
+  li { margin-bottom: 6px; font-size: 0.96rem; }
+  .tag {
+    display: inline-block;
+    background: #2a2e38;
+    color: #fbbf24;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.78rem;
+    margin-right: 6px;
+  }
+  .note {
+    background: #2b1c14;
+    border-left: 4px solid #f97316;
+    padding: 10px 12px;
+    border-radius: 6px;
+    margin: 10px 0;
+    font-size: 0.92rem;
+    color: #fdba74;
+  }
+  .example {
+    background: #142b1c;
+    border-left: 4px solid #22c55e;
+    padding: 10px 12px;
+    border-radius: 6px;
+    margin: 10px 0;
+    font-size: 0.92rem;
+  }
+  .toc {
+    background: #1a1d24;
+    border-radius: 8px;
+    padding: 14px;
+    margin-bottom: 20px;
+  }
+  .toc a {
+    color: #7dd3fc;
+    text-decoration: none;
+    display: block;
+    padding: 4px 0;
+    font-size: 0.92rem;
+  }
+  .divider { border: none; border-top: 1px solid #2a2e38; margin: 24px 0; }
+  code {
+    background: #22262f;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: #86efac;
+    font-size: 0.9rem;
+  }
+  .taccount {
+    display: flex;
+    gap: 0;
+    margin: 12px 0;
+    background: #1a1d24;
+    border: 1px solid #2a2e38;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .taccount-title {
+    background: #22262f;
+    padding: 8px 12px;
+    font-weight: 700;
+    color: #fbbf24;
+    text-align: center;
+    border-bottom: 2px solid #3a3f4a;
+  }
+  .taccount-body {
+    display: flex;
+  }
+  .taccount-side {
+    flex: 1;
+    padding: 8px 10px;
+    font-size: 0.88rem;
+  }
+  .taccount-side.debit { border-right: 2px solid #3a3f4a; }
+  .taccount-side div { margin-bottom: 4px; display: flex; justify-content: space-between; }
+  .taccount-side .label { color: #9ca3af; }
+  .je-line {
+    font-family: monospace;
+    font-size: 0.88rem;
+    background: #14202b;
+    padding: 10px 12px;
+    border-radius: 6px;
+    margin: 8px 0;
+    white-space: pre;
+    overflow-x: auto;
+  }
+</style>
+</head>
+<body>
+
+<h1>📕 Adjusting & Closing Entries — Master Guide</h1>
+
+<div class="toc">
+  <a href="#sec1">১. Adjusting Entries কী ও কেন লাগে</a>
+  <a href="#sec2">২. Adjusting Entries এর ৫ ধরন</a>
+  <a href="#sec3">৩. Closing Entries কী ও কেন লাগে</a>
+  <a href="#sec4">৪. Closing Entries এর ৪ ধাপ</a>
+  <a href="#sec5">৫. Income Summary Account — বিস্তারিত</a>
+  <a href="#sec6">৬. Capital Account এ Posting</a>
+  <a href="#sec7">৭. Post-Closing Trial Balance</a>
+  <a href="#sec8">৮. পূর্ণাঙ্গ Solved Example (পুরো Cycle)</a>
+  <a href="#sec9">৯. তোমার Question টাইপ কীভাবে সমাধান করবে</a>
+  <a href="#sec10">১০. সাধারণ ভুল</a>
+  <a href="#sec11">১১. Reversing Entries</a>
+  <a href="#sec12">১২. Quick Cheat Sheet</a>
+</div>
+
+<h2 id="sec1">১. Adjusting Entries কী ও কেন লাগে</h2>
+<p><strong>Adjusting Entries</strong> হলো accounting period শেষে (সাধারণত মাস/বছর শেষে) করা journal entries, যেগুলো নিশ্চিত করে Revenue আর Expense সঠিক period এ record হয়েছে — এটাকেই বলে <strong>Matching Principle</strong>।</p>
+
+<div class="box">
+<strong>কেন দরকার?</strong> কিছু transaction এমন থাকে যেগুলো একবারে cash এ record হয়ে গেছে কিন্তু আসলে কয়েক period জুড়ে প্রযোজ্য (যেমন এক বছরের জন্য advance এ insurance দেওয়া)। Adjusting entry ছাড়া financial statement ভুল দেখাবে।
+</div>
+
+<div class="formula">Adjusting Entries সবসময় একটা Balance Sheet account + একটা Income Statement account নিয়ে হয়</div>
+
+<h2 id="sec2">২. Adjusting Entries এর ৫ ধরন</h2>
+
+<h3>ক) Prepaid Expenses (আগাম পরিশোধিত খরচ)</h3>
+<p>যেমন Prepaid Insurance, Prepaid Rent, Supplies — এগুলোর ব্যবহৃত অংশ Expense এ নিতে হয়।</p>
+<div class="je-line">Insurance Expense       Dr.  XXX
+    Prepaid Insurance         Cr.  XXX</div>
+
+<h3>খ) Depreciation (অবচয়)</h3>
+<p>Fixed Asset এর মূল্য সময়ের সাথে কমে — সেটা expense হিসেবে record করা হয়।</p>
+<div class="je-line">Depreciation Expense    Dr.  XXX
+    Accumulated Depreciation   Cr.  XXX</div>
+
+<h3>গ) Unearned Revenue (আগাম প্রাপ্ত আয়)</h3>
+<p>Customer আগে টাকা দিয়ে রেখেছে কিন্তু সেবা এখনো দেওয়া হয়নি পুরোপুরি — যতটা কাজ হয়েছে ততটা Revenue এ নিতে হয়।</p>
+<div class="je-line">Unearned Revenue        Dr.  XXX
+    Service Revenue            Cr.  XXX</div>
+
+<h3>ঘ) Accrued Expenses (হয়ে গেছে কিন্তু পরিশোধ হয়নি)</h3>
+<p>যেমন Salaries Expense — period শেষে কর্মচারীর বেতন হয়ে গেছে কিন্তু এখনো দেওয়া হয়নি।</p>
+<div class="je-line">Salaries Expense        Dr.  XXX
+    Salaries Payable           Cr.  XXX</div>
+
+<h3>ঙ) Accrued Revenues (অর্জিত হয়েছে কিন্তু পাওয়া হয়নি)</h3>
+<p>যেমন Interest Revenue — সুদ অর্জিত হয়ে গেছে কিন্তু এখনো cash হাতে আসেনি।</p>
+<div class="je-line">Interest Receivable      Dr.  XXX
+    Interest Revenue           Cr.  XXX</div>
+
+<div class="note">মনে রাখো — Adjusting entry তে কখনও <strong>Cash account</strong> ব্যবহার হয় না। Cash এর transaction তো আগেই হয়ে গেছে; adjusting entry শুধু period এর হিসাব ঠিক করে।</div>
+
+<h2 id="sec3">৩. Closing Entries কী ও কেন লাগে</h2>
+<p><strong>Closing Entries</strong> হলো accounting period এর একদম শেষে করা entries, যেগুলো <strong>temporary accounts</strong> (Revenue, Expense, Drawings) এর balance শূন্যে (zero) নামিয়ে দেয় এবং সেই balance গুলো <strong>Capital account</strong> এ transfer করে দেয়।</p>
+
+<table>
+<tr><th>Account Type</th><th>উদাহরণ</th><th>Closing দরকার?</th></tr>
+<tr><td><strong>Temporary Accounts</strong></td><td>Revenue, Expense, Income Summary, Drawings</td><td>✅ হ্যাঁ — প্রতি period শেষে zero হয়</td></tr>
+<tr><td><strong>Permanent Accounts</strong></td><td>Asset, Liability, Capital</td><td>❌ না — balance carry forward হয়</td></tr>
+</table>
+
+<div class="box">
+<strong>কেন দরকার?</strong> পরের period এ Revenue আর Expense নতুন করে শূন্য থেকে গণনা শুরু করতে হবে — নাহলে দুই বছরের income মিশে যাবে। Capital account এ Net Income/Loss যোগ হয়ে period এর ফলাফল স্থায়ীভাবে record হয়ে যায়।
+</div>
+
+<h2 id="sec4">৪. Closing Entries এর ৪ ধাপ (মুখস্থ রাখো — ক্রম গুরুত্বপূর্ণ)</h2>
+
+<div class="box">
+<strong>Trick মনে রাখো: "RECD"</strong> — <strong>R</strong>evenue close, <strong>E</strong>xpense close, <strong>C</strong>lose Income Summary to Capital, <strong>D</strong>rawings close
+</div>
+
+<h3>Step 1: সব Revenue account বন্ধ করে Income Summary তে নেওয়া</h3>
+<div class="je-line">Sales Revenue            Dr.  XXX
+Interest Revenue         Dr.  XXX
+    Income Summary            Cr.  XXX</div>
+<p>(Revenue এর normal balance Credit, তাই বন্ধ করতে Debit করতে হয়)</p>
+
+<h3>Step 2: সব Expense account বন্ধ করে Income Summary তে নেওয়া</h3>
+<div class="je-line">Income Summary           Dr.  XXX
+    COGS                       Cr.  XXX
+    Salaries Expense           Cr.  XXX
+    Rent Expense                Cr.  XXX
+    (... সব expense)</div>
+<p>(Expense এর normal balance Debit, তাই বন্ধ করতে Credit করতে হয়)</p>
+
+<h3>Step 3: Income Summary বন্ধ করে Capital account এ নেওয়া</h3>
+<p>এই ধাপেই তোমার প্রশ্নের <strong>Income Summary</strong> আর <strong>Capital</strong> account এর সংযোগ ঘটে।</p>
+<div class="je-line">যদি Net Income (Profit) হয়:
+Income Summary           Dr.  XXX
+    Owner, Capital             Cr.  XXX
+
+যদি Net Loss হয়:
+Owner, Capital            Dr.  XXX
+    Income Summary              Cr.  XXX</div>
+
+<h3>Step 4: Drawings account বন্ধ করে Capital account এ নেওয়া</h3>
+<div class="je-line">Owner, Capital           Dr.  XXX
+    Owner, Drawings            Cr.  XXX</div>
+<div class="note">Drawings সরাসরি Income Summary এর মধ্য দিয়ে যায় না — এটা সরাসরি Capital থেকে বিয়োগ হয়, কারণ এটা expense না।</div>
+
+<h2 id="sec5">৫. Income Summary Account — বিস্তারিত</h2>
+<p><strong>Income Summary</strong> একটা <em>temporary clearing account</em> — এর নিজের কোনো "normal balance" নেই, শুধু Revenue আর Expense কে সাময়িকভাবে একসাথে জড়ো করে Net Income/Loss বের করার জন্য ব্যবহৃত হয়। Closing entries শেষে এই account এর balance অবশ্যই <strong>শূন্য (zero)</strong> হয়ে যাবে।</p>
+
+<div class="taccount">
+<div style="flex:1">
+<div class="taccount-title">Income Summary — No. 350</div>
+<div class="taccount-body">
+<div class="taccount-side debit">
+<div class="label" style="font-weight:700;">Debit</div>
+<div><span>Expenses closed</span><span>28,000</span></div>
+<div><span>To Capital (Net Income)</span><span>39,000</span></div>
+</div>
+<div class="taccount-side">
+<div class="label" style="font-weight:700;">Credit</div>
+<div><span>Revenue closed</span><span>67,000</span></div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="example">
+<strong>Logic:</strong> Credit side এ Revenue (67,000) বসলো, Debit side এ Expense (28,000) বসলো। বাকি থাকে 67,000 − 28,000 = 39,000 — এটাই Net Income, যা Debit করে Capital এ Credit করে দেওয়া হয় (account বন্ধ করতে)।
+</div>
+
+<h2 id="sec6">৬. Capital Account এ Posting</h2>
+<p>Closing entries এর Step 3 আর Step 4 থেকে যা যা আসে, সব <strong>Owner, Capital</strong> account এ post হয়।</p>
+
+<div class="taccount">
+<div style="flex:1">
+<div class="taccount-title">B. J. Apachi, Capital</div>
+<div class="taccount-body">
+<div class="taccount-side debit">
+<div class="label" style="font-weight:700;">Debit</div>
+<div><span>Drawings closed</span><span>12,000</span></div>
+</div>
+<div class="taccount-side">
+<div class="label" style="font-weight:700;">Credit</div>
+<div><span>Beginning Balance</span><span>80,000</span></div>
+<div><span>From Income Summary (Net Income)</span><span>39,000</span></div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="example">
+<strong>Ending Capital হিসাব:</strong> 80,000 (Beginning) + 39,000 (Net Income) − 12,000 (Drawings) = <strong>107,000</strong> — এটাই Post-Closing Trial Balance এ Capital হিসেবে যাবে।
+</div>
+
+<div class="note">মনে রাখো: Capital account এ Beginning Balance আগে থেকেই ledger এ থাকে (period শুরুতে)। Closing entries শুধু Net Income আর Drawings যোগ করে।</div>
+
+<h2 id="sec7">৭. Post-Closing Trial Balance</h2>
+<p>Closing entries সব হয়ে যাওয়ার পর যে trial balance বানানো হয়, তাকে বলে <strong>Post-Closing Trial Balance</strong>। এতে শুধু <strong>permanent accounts</strong> (Asset, Liability, Capital) থাকে — কোনো Revenue, Expense, Drawings, বা Income Summary account থাকে না, কারণ ওগুলো সব বন্ধ হয়ে zero হয়ে গেছে।</p>
+
+<div class="formula">Post-Closing Trial Balance = শুধু Balance Sheet Accounts (Assets, Liabilities, Capital)</div>
+
+<table>
+<tr><th>Account</th><th class="amount">Debit ($)</th><th class="amount">Credit ($)</th></tr>
+<tr><td>Cash</td><td class="amount">25,000</td><td class="amount"></td></tr>
+<tr><td>Accounts Receivable</td><td class="amount">18,000</td><td class="amount"></td></tr>
+<tr><td>Equipment</td><td class="amount">60,000</td><td class="amount"></td></tr>
+<tr><td>Accumulated Depreciation</td><td class="amount"></td><td class="amount">8,000</td></tr>
+<tr><td>Accounts Payable</td><td class="amount"></td><td class="amount">17,000</td></tr>
+<tr><td>Notes Payable</td><td class="amount"></td><td class="amount">10,000</td></tr>
+<tr><td>B. J. Apachi, Capital</td><td class="amount"></td><td class="amount">107,000</td></tr>
+<tr class="total"><td>Total</td><td class="amount">142,000</td><td class="amount">142,000</td></tr>
+</table>
+
+<div class="note">লক্ষ্য করো — এখানে কোনো Revenue/Expense/Drawings/Income Summary নেই। শুধু Asset, Liability, আর Capital। Debit Total = Credit Total সবসময় মিলতে হবে।</div>
+
+<h2 id="sec8">৮. পূর্ণাঙ্গ Solved Example (পুরো Cycle একসাথে)</h2>
+
+<div class="box">
+<strong>ধরো, July মাস শেষে Trial Balance (before closing) থেকে জানা গেলো:</strong>
+<ul>
+<li>Service Revenue: $67,000</li>
+<li>Total Expenses (Salaries, Rent, Depreciation ইত্যাদি): $28,000</li>
+<li>Drawings: $12,000</li>
+<li>Beginning Capital (July 1): $80,000</li>
+</ul>
+</div>
+
+<h3>Closing Entry 1 — Revenue বন্ধ</h3>
+<div class="je-line">Service Revenue          Dr.  67,000
+    Income Summary               Cr.  67,000</div>
+
+<h3>Closing Entry 2 — Expenses বন্ধ</h3>
+<div class="je-line">Income Summary            Dr.  28,000
+    Salaries Expense               Cr.  15,000
+    Rent Expense                    Cr.  8,000
+    Depreciation Expense            Cr.  5,000</div>
+
+<h3>Closing Entry 3 — Income Summary বন্ধ করে Capital এ (Net Income = 67,000−28,000 = 39,000)</h3>
+<div class="je-line">Income Summary            Dr.  39,000
+    B. J. Apachi, Capital        Cr.  39,000</div>
+
+<h3>Closing Entry 4 — Drawings বন্ধ করে Capital এ</h3>
+<div class="je-line">B. J. Apachi, Capital     Dr.  12,000
+    B. J. Apachi, Drawings       Cr.  12,000</div>
+
+<p>এই চারটা entry post করার পরই Income Summary আর Capital account এর ঠিক ওই T-account গুলো পাবে যা উপরে ৫ আর ৬ নং section এ দেখানো হয়েছে।</p>
+
+<h2 id="sec9">৯. তোমার Question টাইপ কীভাবে সমাধান করবে</h2>
+<p>তোমার প্রশ্নে যা যা করতে বলা হয়েছে (b আর c অংশ), সেটার approach ঠিক এই রকম হবে:</p>
+
+<div class="box">
+<strong>(b) Post to B. J. Apachi, Capital and No. 350 Income Summary accounts:</strong>
+<ol>
+<li>প্রথমে (a) অংশে যে closing journal entries বানিয়েছো, সেগুলো নাও।</li>
+<li><strong>Income Summary (No. 350)</strong> account এ Revenue closing entry এর Credit side, আর সব Expense closing entry এর Debit side পোস্ট করো।</li>
+<li>Income Summary এর balance বের করো (Credit − Debit = Net Income, অথবা উল্টো হলে Net Loss)।</li>
+<li>সেই balance Income Summary থেকে <strong>Capital account</strong> এ Credit (Net Income হলে) বা Debit (Net Loss হলে) করো।</li>
+<li>এরপর Drawings closing entry থেকে Capital account এ Debit করো।</li>
+<li>Capital account এর নতুন (ending) balance বের করো — এটাই তোমার final answer হবে এই অংশের।</li>
+</ol>
+</div>
+
+<div class="box">
+<strong>(c) Post-Closing Trial Balance at July 31:</strong>
+<ol>
+<li>Closing entries সব post হয়ে যাওয়ার পর, শুধু Balance Sheet accounts (Assets, Liabilities, Capital) নিয়ে trial balance বানাও।</li>
+<li>Capital account এ এখন Ending Capital বসবে (Step (b) থেকে পাওয়া নতুন balance)।</li>
+<li>Debit Total আর Credit Total মিলিয়ে দেখো — মিললে ঠিক আছে।</li>
+</ol>
+</div>
+
+<div class="note">তোমার প্রশ্নে যদি নির্দিষ্ট সংখ্যা (Trial Balance বা Adjusted Trial Balance figures) দেওয়া থাকে, সেগুলো আমাকে দিলে আমি সরাসরি তোমার নিজের Data দিয়ে (b) আর (c) সমাধান করে দিতে পারবো।</div>
+
+<h2 id="sec10">১০. সাধারণ ভুল যা এড়াতে হবে</h2>
+<ul>
+<li>❌ Closing entries এর ক্রম ভুল করা — Revenue আগে, Expense পরে, তারপর Income Summary, শেষে Drawings।</li>
+<li>❌ Drawings কে Income Summary এর মধ্য দিয়ে বন্ধ করা — এটা ভুল, Drawings সরাসরি Capital এ যায়।</li>
+<li>❌ Adjusting entries আর Closing entries গুলিয়ে ফেলা — Adjusting entries balance ঠিক করে, Closing entries temporary accounts শূন্য করে।</li>
+<li>❌ Post-Closing Trial Balance এ Revenue/Expense account রেখে দেওয়া — এগুলো এই trial balance এ থাকবেই না।</li>
+<li>❌ Net Loss হলে Capital থেকে Debit না করে Credit করে ফেলা।</li>
+<li>❌ Income Summary account এর final balance zero না হওয়া (হলে বুঝতে হবে পোস্টিং এ ভুল আছে)।</li>
+</ul>
+
+<h2 id="sec11">১১. Reversing Entries</h2>
+<p><strong>Reversing Entries</strong> হলো নতুন period এর প্রথম দিনে করা <em>ঐচ্ছিক (optional)</em> journal entries, যেগুলো আগের period এর শেষে করা কিছু নির্দিষ্ট adjusting entries কে উল্টে (reverse) দেয়। উদ্দেশ্য — পরের period এ normal transaction record করার সময় হিসাব সহজ ও ভুলমুক্ত রাখা।</p>
+
+<div class="box">
+<strong>কেন দরকার?</strong> কিছু adjusting entry (বিশেষ করে Accrued Expense আর Accrued Revenue) এমন account তৈরি করে যেগুলো পরের period এ আসল payment/receipt এর সাথে গুলিয়ে যেতে পারে। Reversing entry দিয়ে সেই জটিলতা এড়ানো যায়।
+</div>
+
+<h3>কোন Adjusting Entries Reverse করা হয়?</h3>
+<table>
+<tr><th>Adjusting Entry Type</th><th>Reverse করা হয়?</th></tr>
+<tr><td>Accrued Expenses (যেমন Salaries Payable)</td><td>✅ হ্যাঁ</td></tr>
+<tr><td>Accrued Revenues (যেমন Interest Receivable)</td><td>✅ হ্যাঁ</td></tr>
+<tr><td>Prepaid Expenses (যদি Expense method এ record করা হয়)</td><td>✅ হ্যাঁ (শর্তসাপেক্ষ)</td></tr>
+<tr><td>Unearned Revenue (যদি Revenue method এ record করা হয়)</td><td>✅ হ্যাঁ (শর্তসাপেক্ষ)</td></tr>
+<tr><td>Depreciation</td><td>❌ না</td></tr>
+<tr><td>Bad Debts Expense</td><td>❌ না</td></tr>
+</table>
+
+<div class="note">Trick মনে রাখো: যেগুলো <strong>Cash এখনো হাতবদল হয়নি</strong> (accrued items) তাদের reverse করা হয়, কারণ পরের period এ cash আসবে/যাবে। Depreciation বা Bad Debts এ কোনো future cash transaction নেই, তাই reverse করার দরকার নেই।</div>
+
+<h3>উদাহরণ — Accrued Salaries এর Reversing Entry</h3>
+<p><strong>ধাপ ১ — July 31 এ Adjusting Entry:</strong></p>
+<div class="je-line">Salaries Expense         Dr.  2,000
+    Salaries Payable             Cr.  2,000</div>
+
+<p><strong>ধাপ ২ — August 1 এ Reversing Entry (উল্টো):</strong></p>
+<div class="je-line">Salaries Payable          Dr.  2,000
+    Salaries Expense              Cr.  2,000</div>
+
+<p><strong>ধাপ ৩ — August 5 এ যখন আসল Salary পরিশোধ হয় (ধরো মোট $5,000, যার মধ্যে $2,000 জুলাইয়ের):</strong></p>
+<div class="je-line">Salaries Expense          Dr.  5,000
+    Cash                          Cr.  5,000</div>
+
+<div class="example">
+<strong>Reversing entry ছাড়া হলে কী হতো:</strong> August এ payment record করার সময় হিসাবরক্ষককে মনে রাখতে হতো কতটা Salaries Payable থেকে আর কতটা নতুন Expense থেকে যাচ্ছে — আলাদা করে ভাগ করতে হতো। Reversing entry দিলে পুরো $5,000 সরাসরি Salaries Expense এ debit করা যায়, কোনো জটিলতা ছাড়াই। শেষ ফলাফল একই থাকে (August এ Net Salaries Expense = 5,000 − 2,000 = 3,000, যেটা প্রকৃতপক্ষে আগস্টের কাজের জন্য প্রযোজ্য)।
+</div>
+
+<h3>Reversing Entries এর মূল বৈশিষ্ট্য</h3>
+<ul>
+<li>এগুলো <strong>ঐচ্ছিক (optional)</strong> — accounting cycle এর বাধ্যতামূলক অংশ না।</li>
+<li>সবসময় নতুন period এর <strong>প্রথম দিনে</strong> করা হয় (closing entries এর পরে)।</li>
+<li>এটা শুধু আগের adjusting entry এর Debit/Credit ঠিক উল্টে দেয় — একই amount, বিপরীত দিক।</li>
+<li>Financial statements এর চূড়ান্ত ফলাফলে কোনো প্রভাব ফেলে না — শুধু পরের period এ বুককিপিং সহজ করে।</li>
+</ul>
+
+<h2 id="sec12">১২. Quick Cheat Sheet</h2>
+<div class="formula">
+Adjusting Entries → period এর হিসাব ঠিক করে (Cash কখনো জড়ায় না)<br><br>
+Closing Order: Revenue → Expense → Income Summary → Drawings<br><br>
+Income Summary Balance = Net Income/Loss (শেষে zero হয়ে যায়)<br><br>
+Ending Capital = Beginning + Net Income (−Loss) − Drawings<br><br>
+Post-Closing Trial Balance = শুধু Asset + Liability + Capital<br><br>
+Reversing Entries = শুধু Accrued items এর জন্য, নতুন period এর দিন ১-এ, ঐচ্ছিক
+</div>
+
+<div class="box">
+<strong>মনে রাখার Trick:</strong> <code>RECD</code> — <strong>R</strong>evenue close → <strong>E</strong>xpense close → <strong>C</strong>apital এ Income Summary close → <strong>D</strong>rawings close
+</div>
+
+<hr class="divider">
+<p style="text-align:center; color:#666; font-size:0.85rem;">Adjusting & Closing Entries Master Guide • BBA 1st Year</p>
+
+</body>
+</html>
